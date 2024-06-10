@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="shortcut.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -37,7 +38,7 @@
       text-align: center;
     }
     .header img {
-      width: 100%; /* Sesuaikan ukuran gambar header */
+      width: 100%;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -47,37 +48,34 @@
     .input-label {
       position: absolute;
       top: 50%;
-      left: 10px; /* Sesuaikan dengan posisi yang diinginkan */
+      left: 10px;
       transform: translateY(-50%);
-      color: #6c757d; /* Sesuaikan dengan warna font yang diinginkan */
-      font-size: 14px; /* Sesuaikan dengan ukuran font yang diinginkan */
-      pointer-events: none; /* Ini akan mengabaikan interaksi dengan span */
-      transition: opacity 0.3s ease; /* Animasi fade */
-      opacity: 1; /* Awalnya terlihat */
+      color: #6c757d;
+      font-size: 14px;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      opacity: 1;
     }
     .form-control {
-      padding-left: 30px; /* Sesuaikan dengan lebar label */
+      padding-left: 30px;
     }
     .form-control:focus + .input-label,
     .form-control:not(:placeholder-shown) + .input-label {
-      opacity: 0; /* Menyembunyikan label ketika input mendapat fokus atau tidak kosong */
+      opacity: 0;
     }
-    /* Gaya untuk span pada input Nama */
     #name ~ .input-label {
-      color: #49505791; /* Sesuaikan dengan warna font yang diinginkan */
+      color: #49505791;
     }
-    /* Gaya untuk span pada input Saran */
     #body ~ .input-label {
-      color: #49505779; /* Sesuaikan dengan warna font yang diinginkan */
+      color: #49505779;
     }
-    /* Tambahan jarak untuk tampilan seluler */
     @media (max-width: 576px) {
       body {
-        padding: 10px; /* Padding lebih kecil untuk tampilan seluler */
+        padding: 10px;
       }
       .container {
-        margin: 0 auto; /* Margin otomatis untuk meratakan */
-        padding: 30px; /* Tambahkan padding agar tidak mentok */
+        margin: 0 auto;
+        padding: 30px;
       }
     }
     .social-buttons {
@@ -98,18 +96,16 @@
           <img src="nama.png" alt="User Icon" style="width: 20px; height: 20px; margin-right: 0px;">
           Nama
         </label>
-        
         <div class="input-with-label">
           <input type="text" class="form-control" id="name" name="name" placeholder="">
           <span class="input-label">ketik nama kamu disini</span>
         </div>
       </div>
       <div class="mb-3">
-        <label for="name" class="form-label">
+        <label for="body" class="form-label">
           <img src="saran.png" alt="Saran Icon" style="width: 20px; height: 20px; margin-right: 0px;">
           Saran
         </label>
-
         <div class="input-with-label">
           <input type="text" class="form-control" id="body" name="body" required placeholder="">
           <span class="input-label">lalu masukkan saran dari kamu ya!</span>
@@ -120,7 +116,7 @@
           <i class="fas fa-paper-plane"></i> Submit
         </button>
         <div class="social-buttons">
-          <a href="https://wa.me/085882904630" target="_blank" class="btn btn-outline-success"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://salwaazkia.my.canva.site/" target="_blank" class="btn btn-outline-dark" id="userIcon"><i class="fas fa-address-card"></i></a>
           <a href="https://www.instagram.com/salwainseventheaven?igsh=MXhlbnFkYTIxd3I0NQ%3D%3D&utm_source=qr" target="_blank" class="btn btn-outline-danger"><i class="fab fa-instagram"></i></a>
           <a href="https://github.com/SalwaAzkia" target="_blank" class="btn btn-outline-dark"><i class="fab fa-github"></i></a>
         </div>
@@ -128,6 +124,7 @@
     </form>
   </div>
 
+  <audio id="userMusic" src="thankyouforlovingme.mp3" loop></audio> 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const inputs = document.querySelectorAll('.form-control');
@@ -144,7 +141,7 @@
 
       const form = document.getElementById('saranForm');
       form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); // Mencegah pengiriman form secara default
 
         const formData = new FormData(form);
         fetch('https://script.google.com/macros/s/AKfycbykYTfsguV8MoVpUEFsgfit6KixHNVJ7fkuSBDbT1z852OBYlM1s_ZTzxeQcnSD1C8EKA/exec', {
@@ -159,6 +156,20 @@
         .catch((error) => {
           console.error('Error:', error);
         });
+      });
+
+      // Event listener untuk memutar musik saat ikon user diklik
+      const userIcon = document.getElementById('userIcon');
+      const userMusic = document.getElementById('userMusic');
+
+      userIcon.addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah navigasi default
+        userMusic.play(); // Memutar musik
+
+        // Setelah musik diputar, baru mengarahkan ke link
+        setTimeout(() => {
+          window.open(userIcon.href, '_blank');
+        }, 300); // Menunda pembukaan link sedikit untuk memastikan musik diputar
       });
     });
   </script>
