@@ -158,7 +158,7 @@
         });
       });
 
-      // Event listener untuk memutar musik saat ikon user diklik
+    
       const userIcon = document.getElementById('userIcon');
       const userMusic = document.getElementById('userMusic');
 
@@ -166,7 +166,6 @@
         event.preventDefault(); // Mencegah navigasi default
         userMusic.play(); // Memutar musik
 
-        // Setelah musik diputar, baru mengarahkan ke link
         setTimeout(() => {
           window.open(userIcon.href, '_blank');
         }, 300); // Menunda pembukaan link sedikit untuk memastikan musik diputar
